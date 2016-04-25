@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>KM System</title>
+<script src="js/jquery-1.8.3.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="js/jquery.jstree.js"></script>
+
+<link rel="stylesheet" href="css/style2.css"/>
+<script type="text/javascript">
+	$(function () {
+		$("#permission-tree, #document-tree")
+			.jstree();
+
+		$( ".icon-next-40" ).click(function(){
+			$(".icon-next-40").switchClass( "c-dog","c-lbl",0);
+			$(this).switchClass( "c-lbl","c-dog",0);
+			return false;
+		});
+	});
+</script>
+
+</head>
+<body>
+
+		<div class="list-view">
+			<div class="list-title c-dbl-b">
+				<span>文件樹</span>
+			</div>
+			<div id="permission-tree">
+				<ul>
+					<li class="jstree-open">
+						<a href="#">總經理秘書</a>
+						<ul>
+							<li>
+								<a href="#">總經理秘書</a>
+								<input type="button" class="bt-icon-40 fr c-lbl icon-next-40"/>
+							</li>
+							<li>
+								<a href="#">總經理秘書</a>
+								<input type="button" class="bt-icon-40 fr c-lbl icon-next-40"/>
+							</li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">總經理秘書</a>
+						<input type="button" class="bt-icon-40 fr c-lbl icon-next-40"/>
+					</li>
+					<li class="jstree-open">
+						<a href="#">總經理秘書</a>
+						<ul>
+							<li class="jstree-open">
+								<a href="#">總經理秘書</a>
+								<ul>
+									<li>
+										<a href="#">總經理秘書</a>
+										<input type="button" class="bt-icon-40 fr c-lbl icon-next-40"/>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#">總經理秘書</a>
+								<input type="button" class="bt-icon-40 fr c-lbl icon-next-40"/>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<div class="clear"></div>
+			<div class="c-dbl-b list-text"></div>
+		</div>
+	
+</body>
+</html>

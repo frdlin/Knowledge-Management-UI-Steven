@@ -1,0 +1,19 @@
+
+
+.jstree-default a ins.jstree-icon {
+	display: none;
+}
+
+#document-tree.jstree, #permission-tree.jstree {
+	margin-bottom: 2px;
+	border: 1px dotted #C6CAD1;
+}
+
+
+.jstree > ul > li {
+	margin-left: 0px !important;
+	background-color: #FFF !important;
+	margin-bottom: 3px;
+	padding-left: 15px;
+}
+

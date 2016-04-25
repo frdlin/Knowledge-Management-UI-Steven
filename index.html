@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>KM System</title>
+<script src="js/jquery-1.8.3.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="js/jquery.selectbox-0.2.js"></script>
+<link rel="stylesheet" href="css/jquery.selectbox.css" />
+<link rel="stylesheet" href="css/main-style.css">
+<link rel="stylesheet" href="css/jquery-ui.css" />
+	<script type="text/javascript">
+		$(function () {
+
+			$("#search, #hot-doc-sort, #new-doc-sort ,#new-discuss-sort").selectbox();
+
+			$( document ).tooltip({
+				track: true
+			});
+
+		});
+	</script>
+</head>
+<body>
+	    <div id="head">
+	    	<div class="logo"><a href="#"><img src="images/logo.png" alt="Logo"/></a></div>
+	    	<input type="button" value="" class="bt-icon fr c-trans icon-setting bt-setting" title="管理中心"/>
+	    	<div class="user"><a href="#">Steven Tu</a></div>
+	    </div>
+	    <div id="search-area">
+	    	<input type="button" class="bt-text fr c-dbl ml-15" value="進階搜尋"/>
+	    	<input type="button" class="bt-icon fr c-dog icon-search" value="" id="delete-document"/>
+	    	<input type="text" class="fr ml-15" style="width: 380px;" placeholder="快速搜尋"/>
+	    	<select id="search" class="fr">
+	    		<option>搜尋區塊</option>
+	    		<option value="iso-document">ISO文件</option>
+	    		<option value="order-document">訂單文件</option>
+	    		<option value="kwoledge-bank">知識庫</option>
+	    		<option value="introcontrol-document">內控文件</option>
+	    		<option value="faq">FAQ問答</option>
+	    	</select>
+	    </div>
+	    <div id="content-area">
+	    	<div id="menu-area">
+	    		<ul id="main-menu">
+	    			<a href="#"><li class="menu-index">首頁</li></a>
+	    			<a href="#"><li class="menu-document-tree">文件樹</li></a>
+	    			<a href="#"><li class="menu-knowledge-tree">知識樹</li></a>
+	    			<a href="#"><li class="menu-form-maintain">表單維護</li></a>
+	    		</ul>
+	    		<ul id="counter-area">
+	    			<a href="#"><li class="counter-document"><span class="counter-number">1234567</span><br><span class="counter-text">文件</span></li></a>
+	    			<a href="#"><li class="counter-online"><span class="counter-number">567</span><br><span class="counter-text">上線</span></li></a>
+	    			<a href="#"><li class="counter-pending"><span class="counter-number">567</span><br><span class="counter-text">待審核</span></li></a>
+	    			<a href="#"><li class="counter-new"><span class="counter-number">127</span><br><span class="counter-text">新增</span></li></a>
+	    			<a href="#"><li class="counter-update"><span class="counter-number">127</span><br><span class="counter-text">新增</span></li></a>
+	    			<a href="#"><li class="counter-reading"><span class="counter-number">157</span><br><span class="counter-text">閱讀中</span></li></a>
+	    		</ul>
+	    	</div>
+	    	<div id="main-content">
+	    		<div class="main-content-left">
+	    			<div class="list-view">
+	    				<div class="list-title c-dgn-b">
+	    					<span>熱門文件</span>
+	    					<select id="hot-doc-sort" class="fr selector-sort">
+					    		<option>月排名</option>
+					    		<option>週排名</option>
+					    		<option>日排名</option>
+					    	</select>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<a href="#" title="更多"><div class="c-dgn list-more"></div></a>
+	    			</div>
+	    			<div class="list-view">
+	    				<div class="list-title c-dgn-b">
+	    					<span>最新文件</span>
+	    					<select id="new-doc-sort" class="fr selector-sort">
+					    		<option>月排名</option>
+					    		<option>週排名</option>
+					    		<option>日排名</option>
+					    	</select>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<a href="#" title="更多"><div class="c-dgn list-more"></div></a>
+	    			</div>
+	    		</div>
+	    		<div class="main-content-right">
+	    			<div class="list-view">
+	    				<div class="list-title c-dgn-b">
+	    					<span>最新討論</span>
+	    					<select id="new-discuss-sort" class="fr selector-sort">
+					    		<option>月排名</option>
+					    		<option>週排名</option>
+					    		<option>日排名</option>
+					    	</select>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<a href="#" title="更多"><div class="c-dgn list-more"></div></a>
+	    			</div>
+	    			<div class="list-view">
+	    				<div class="list-title-two-button c-dog-b">
+	    					<span>簽核文件</span>
+	    					<input type="button" class="bt-icon fr c-log icon-list" title="全部文件"/>
+	    					<input type="button" class="bt-icon fr c-log icon-personal" title="您的簽核"/>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<div class="list-content">
+	    					<div class="list-content-main">
+	    						<span class="title"><a href="#">標題</a></span>
+	    						<span class="department"><a href="#">財務部</a></span>
+	    						<div class="clear"></div>
+	    					</div>
+	    					<div class="list-content-info">
+	    						<span class="writer"><a href="#">Steven Tu</a></span>
+	    						<span class="date">2 days</span>
+	    					</div>
+	    				</div>
+	    				<a href="#" title="更多"><div class="c-dog list-more"></div></a>
+	    			</div>
+	    		</div>
+	    		<div class="clear"></div>
+	    		<div class="tag-cloud">
+	    			<div class="list-title c-dbl-b"><span>熱門標簽</span></div>
+	    				<div class="tag-content">
+	    					<a class="tag-01">新兵日記</a><a class="tag-02">新兵日記兵日記</a><a class="tag-03">新兵日日記</a><a class="tag-04">新日記</a><a class="tag-01">新兵日記</a><a class="tag-02">新兵日記兵日記</a><a class="tag-03">新兵日日記</a><a class="tag-04">新日記</a><a class="tag-01">新兵日記</a><a class="tag-02">新兵日記兵日記</a><a class="tag-03">新兵日日記</a><a class="tag-04">新日記</a>
+	    					<div class="clear"></div>
+	    				</div>
+	    			<a href="#" title="更多"><div class="c-dbl list-more"></div></a>
+	    		</div>
+	    	</div>
+	    </div>
+	    <div class="clear"></div>
+	    <div id="footer"></div>
+</body>
+</html>

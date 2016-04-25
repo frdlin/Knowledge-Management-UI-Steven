@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>KM System</title>
+<script src="js/jquery-1.8.3.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="js/jquery.selectbox-0.2.js"></script>
+	<script type="text/javascript" src="js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="js/jquery.hotkeys.js"></script>
+	<script type="text/javascript" src="js/jquery.jstree.js"></script>
+<link rel="stylesheet" href="css/jquery.selectbox.css" />
+<link rel="stylesheet" href="css/main-style.css">
+<link rel="stylesheet" href="css/tree-view.css">
+<link rel="stylesheet" href="css/jquery-ui.css">
+	<link type="text/css" rel="stylesheet" href="css/tree-view.css"/>
+	<link type="text/css" rel="stylesheet" href="css/style.css"/>
+	<script type="text/javascript">
+		$(function () {
+
+			$("#search").selectbox();
+
+			$( document ).tooltip({
+				track: true
+			});
+
+			$( ".icon-next-40" ).click(function(){
+				$(".icon-next-40").switchClass( "c-dog","c-lbl",0);
+				$(this).switchClass( "c-lbl","c-dog",0);
+				return false;
+			});
+		});
+	</script>
+	<script type="text/javascript">
+		$(function () {
+			$("#demo")
+				.jstree();
+		});
+	</script>
+
+	<!--script type="text/javascript" class="source below">
+		$(function () {
+
+		$("#demo")
+			.bind("before.jstree", function (e, data) {
+				$("#alog").append(data.func + "<br />");
+			})
+			.jstree({ 
+				// List of active plugins
+				"plugins" : [ 
+					"themes","json_data","ui","crrm","cookies","dnd","search","types","hotkeys","contextmenu" 
+				],
+
+				// I usually configure the plugin that handles the data first
+				// This example uses JSON as it is most common
+				"json_data" : { 
+					// This tree is ajax enabled - as this is most common, and maybe a bit more complex
+					// All the options are almost the same as jQuery's AJAX (read the docs)
+					"ajax" : {
+						// the URL to fetch the data
+						"url" : "./server.php",
+						// the `data` function is executed in the instance's scope
+						// the parameter is the node being loaded 
+						// (may be -1, 0, or undefined when loading the root nodes)
+						"data" : function (n) { 
+							// the result is fed to the AJAX request `data` option
+							return { 
+								"operation" : "get_children", 
+								"id" : n.attr ? n.attr("id").replace("node_","") : 1 
+							}; 
+						}
+					}
+				},
+				// Configuring the search plugin
+				"search" : {
+					// As this has been a common question - async search
+					// Same as above - the `ajax` config option is actually jQuery's AJAX object
+					"ajax" : {
+						"url" : "./server.php",
+						// You get the search string as a parameter
+						"data" : function (str) {
+							return { 
+								"operation" : "search", 
+								"search_str" : str 
+							}; 
+						}
+					}
+				},
+				// Using types - most of the time this is an overkill
+				// read the docs carefully to decide whether you need types
+				"types" : {
+					// I set both options to -2, as I do not need depth and children count checking
+					// Those two checks may slow jstree a lot, so use only when needed
+					"max_depth" : -2,
+					"max_children" : -2,
+					// I want only `drive` nodes to be root nodes 
+					// This will prevent moving or creating any other type as a root node
+					"valid_children" : [ "drive" ],
+					"types" : {
+						// The default type
+						"default" : {
+							// I want this type to have no children (so only leaf nodes)
+							// In my case - those are files
+							"valid_children" : "none",
+							// If we specify an icon for the default type it WILL OVERRIDE the theme icons
+							"icon" : {
+								"image" : "./file.png"
+							}
+						},
+						// The `folder` type
+						"folder" : {
+							// can have files and other folders inside of it, but NOT `drive` nodes
+							"valid_children" : [ "default", "folder" ],
+							"icon" : {
+								"image" : "./folder.png"
+							}
+						},
+						// The `drive` nodes 
+						"drive" : {
+							// can have files and folders inside, but NOT other `drive` nodes
+							"valid_children" : [ "default", "folder" ],
+							"icon" : {
+								"image" : "./root.png"
+							},
+							// those prevent the functions with the same name to be used on `drive` nodes
+							// internally the `before` event is used
+							"start_drag" : false,
+							"move_node" : false,
+							"delete_node" : false,
+							"remove" : false
+						}
+					}
+				},
+				// UI & core - the nodes to initially select and open will be overwritten by the cookie plugin
+
+				// the UI plugin - it handles selecting/deselecting/hovering nodes
+				"ui" : {
+					// this makes the node with ID node_4 selected onload
+					"initially_select" : [ "node_4" ]
+				},
+				// the core plugin - not many options here
+				"core" : { 
+					// just open those two nodes up
+					// as this is an AJAX enabled tree, both will be downloaded from the server
+					"initially_open" : [ "node_2" , "node_3" ] 
+				}
+			})
+			.bind("create.jstree", function (e, data) {
+				$.post(
+					"./server.php", 
+					{ 
+						"operation" : "create_node", 
+						"id" : data.rslt.parent.attr("id").replace("node_",""), 
+						"position" : data.rslt.position,
+						"title" : data.rslt.name,
+						"type" : data.rslt.obj.attr("rel")
+					}, 
+					function (r) {
+						if(r.status) {
+							$(data.rslt.obj).attr("id", "node_" + r.id);
+						}
+						else {
+							$.jstree.rollback(data.rlbk);
+						}
+					}
+				);
+			})
+			.bind("remove.jstree", function (e, data) {
+				data.rslt.obj.each(function () {
+					$.ajax({
+						async : false,
+						type: 'POST',
+						url: "./server.php",
+						data : { 
+							"operation" : "remove_node", 
+							"id" : this.id.replace("node_","")
+						}, 
+						success : function (r) {
+							if(!r.status) {
+								data.inst.refresh();
+							}
+						}
+					});
+				});
+			})
+			.bind("rename.jstree", function (e, data) {
+				$.post(
+					"./server.php", 
+					{ 
+						"operation" : "rename_node", 
+						"id" : data.rslt.obj.attr("id").replace("node_",""),
+						"title" : data.rslt.new_name
+					}, 
+					function (r) {
+						if(!r.status) {
+							$.jstree.rollback(data.rlbk);
+						}
+					}
+				);
+			})
+			.bind("move_node.jstree", function (e, data) {
+				data.rslt.o.each(function (i) {
+					$.ajax({
+						async : false,
+						type: 'POST',
+						url: "./server.php",
+						data : { 
+							"operation" : "move_node", 
+							"id" : $(this).attr("id").replace("node_",""), 
+							"ref" : data.rslt.cr === -1 ? 1 : data.rslt.np.attr("id").replace("node_",""), 
+							"position" : data.rslt.cp + i,
+							"title" : data.rslt.name,
+							"copy" : data.rslt.cy ? 1 : 0
+						},
+						success : function (r) {
+							if(!r.status) {
+								$.jstree.rollback(data.rlbk);
+							}
+							else {
+								$(data.rslt.oc).attr("id", "node_" + r.id);
+								if(data.rslt.cy && $(data.rslt.oc).children("UL").length) {
+									data.inst.refresh(data.inst._get_parent(data.rslt.oc));
+								}
+							}
+							$("#analyze").click();
+						}
+					});
+				});
+			});
+
+		});
+	</script-->
+	<script type="text/javascript" class="source below">
+	// Code for the menu buttons
+	$(function () { 
+		$("#menu-area input").click(function () {
+			switch(this.id) {
+				case "add_default":
+				case "add_folder":
+					$("#demo").jstree("create", null, "last", { "attr" : { "rel" : this.id.toString().replace("add_", "") } });
+					break;
+				case "search":
+					$("#demo").jstree("search", document.getElementById("text").value);
+					break;
+				case "text": break;
+				default:
+					$("#demo").jstree(this.id);
+					break;
+			}
+		});
+	});
+	</script>
+</head>
+<body>
+	    <div id="head">
+	    	<div class="logo"><a href="#"><img src="images/logo.png" alt="Logo"/></a></div>
+	    	<input type="button" value="" class="bt-icon fr c-trans icon-setting bt-setting" title="管理中心"/>
+	    	<div class="user"><a href="#">Steven Tu</a></div>
+	    </div>
+	    <div id="search-area">
+	    	<input type="button" class="bt-text fr c-dbl ml-15" value="進階搜尋"/>
+	    	<input type="button" class="bt-icon fr c-dog icon-search" value=""/>
+	    	<input type="text" class="fr ml-15" style="width: 380px;" placeholder="快速搜尋"/>
+	    	<select id="search" class="fr">
+	    		<option>搜尋區塊</option>
+	    		<option value="iso-document">ISO文件</option>
+	    		<option value="order-document">訂單文件</option>
+	    		<option value="kwoledge-bank">知識庫</option>
+	    		<option value="introcontrol-document">內控文件</option>
+	    		<option value="faq">FAQ問答</option>
+	    	</select>
+	    </div>
+	    <div id="content-area">
+	    	<div id="menu-area">
+	    		<ul id="main-menu">
+	    			<a href="#"><li class="menu-index">首頁</li></a>
+	    			<a href="#"><li class="menu-document-tree">文件樹</li></a>
+	    			<a href="#"><li class="menu-knowledge-tree">知識樹</li></a>
+	    			<a href="#"><li class="menu-form-maintain">表單維護</li></a>
+	    		</ul>
+	    		<ul id="counter-area">
+	    			<a href="#"><li class="counter-document"><span class="counter-number">1234567</span><br><span class="counter-text">文件</span></li></a>
+	    			<a href="#"><li class="counter-online"><span class="counter-number">567</span><br><span class="counter-text">上線</span></li></a>
+	    			<a href="#"><li class="counter-pending"><span class="counter-number">567</span><br><span class="counter-text">待審核</span></li></a>
+	    			<a href="#"><li class="counter-new"><span class="counter-number">127</span><br><span class="counter-text">新增</span></li></a>
+	    			<a href="#"><li class="counter-update"><span class="counter-number">127</span><br><span class="counter-text">新增</span></li></a>
+	    			<a href="#"><li class="counter-reading"><span class="counter-number">157</span><br><span class="counter-text">閱讀中</span></li></a>
+	    		</ul>
+	    		<div class="clear"></div>
+	    	</div>
+	    	<div id="main-content">
+		    		<div class="main-content-left">
+		    			<div class="list-view">
+		    				<div class="list-title c-dbl-b">
+		    					<span>文件樹</span>
+		    					<input type="button" id="remove" class="bt-icon fr c-lbl icon-close" title="刪除"/>
+		    					<input type="button" id="rename" class="bt-icon fr c-lbl icon-edit" title="重新命名"/>
+		    					<input type="button" id="add_default" class="bt-icon fr c-lbl icon-document" title="新增文件"/>
+		    					<input type="button" id="add_folder" class="bt-icon fr c-lbl icon-folder" title="新增資料夾"/>
+		    				</div>
+		    				<div id="demo">
+								<ul>
+									<li class="jstree-open">
+										<a href="#">總經理秘書</a>
+										<ul>
+											<li>
+												<a href="#">總經理秘書</a>
+												<input type="button" class="bt-icon-40 fr c-lbl icon-next-40"/>
+											</li>
+											<li>
+												<a href="#">總經理秘書</a>
+												<input type="button" class="bt-icon-40 fr c-lbl icon-next-40"/>
+											</li>
+										</ul>
+									</li>
+									<li>
+										<a href="#">總經理秘書</a>
+										<input type="button" class="bt-icon-40 fr c-lbl icon-next-40"/>
+									</li>
+									<li>
+										<a href="#">總經理秘書</a>
+										<ul>
+											<li>
+												<a href="#">總經理秘書</a>
+												<ul>
+													<li>
+														<a href="#">總經理秘書</a>
+														<input type="button" class="bt-icon-40 fr c-lbl icon-next-40"/>
+													</li>
+												</ul>
+											</li>
+											<li>
+												<a href="#">總經理秘書</a>
+												<input type="button" class="bt-icon-40 fr c-lbl icon-next-40"/>
+											</li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<div class="clear"></div>
+		    				<div class="c-dbl-b list-text"></div>
+		    			</div>
+		    			<div class="clear"></div>
+		    		</div>
+		    		<div class="main-content-right">
+		    			<div class="list-view">
+		    				<div class="list-title c-dog-b">
+		    					<span>搜尋結果</span>
+		    					<input type="button" class="bt-icon fr c-log icon-document" title="管理文件"/>
+		    				</div>
+		    				<div class="list-content">
+		    					<div class="list-content-main">
+		    						<span class="title"><a href="#">標題</a></span>
+		    						<div class="clear"></div>
+		    					</div>
+		    					<div class="list-content-info">
+		    						<span class="date">2013/05/20 13:35:21</span>
+		    					</div>
+		    				</div>
+		    				<div class="list-content">
+		    					<div class="list-content-main">
+		    						<span class="title"><a href="#">標題</a></span>
+		    						<div class="clear"></div>
+		    					</div>
+		    					<div class="list-content-info">
+		    						<span class="date">2013/05/20 13:35:21</span>
+		    					</div>
+		    				</div>
+		    				<div class="list-content">
+		    					<div class="list-content-main">
+		    						<span class="title"><a href="#">標題</a></span>
+		    						<div class="clear"></div>
+		    					</div>
+		    					<div class="list-content-info">
+		    						<span class="date">2013/05/20 13:35:21</span>
+		    					</div>
+		    				</div>
+		    				<div class="list-content">
+		    					<div class="list-content-main">
+		    						<span class="title"><a href="#">標題</a></span>
+		    						<div class="clear"></div>
+		    					</div>
+		    					<div class="list-content-info">
+		    						<span class="date">2013/05/20 13:35:21</span>
+		    					</div>
+		    				</div>
+		    				<div class="list-content">
+		    					<div class="list-content-main">
+		    						<span class="title"><a href="#">標題</a></span>
+		    						<div class="clear"></div>
+		    					</div>
+		    					<div class="list-content-info">
+		    						<span class="date">2013/05/20 13:35:21</span>
+		    					</div>
+		    				</div>
+		    				<div class="c-dog-b list-text">目前查詢筆數共有5筆</div>
+		    			</div>
+		    		</div>
+		    		<div class="clear"></div>
+	    	</div>
+	    </div>
+	    <div class="clear"></div>
+	    <div id="footer"></div>
+</body>
+</html>

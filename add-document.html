@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>KM System</title>
+<script src="js/jquery-1.8.3.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="js/jquery.selectbox-0.2.js"></script>
+<script src="js/jquery.jstree.js"></script>
+<link rel="stylesheet" href="css/jquery.selectbox.css" />
+<link rel="stylesheet" href="css/main-style.css">
+<link rel="stylesheet" href="css/jquery-ui.css" />
+<link rel="stylesheet" href="css/tree-view.css">
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="css/style3.css"/>
+<script type="text/javascript">
+	$(function () {
+		$("#document-tree, #permission-tree")
+			.jstree();
+	});
+</script>
+
+	<script type="text/javascript">
+		$(function () {
+			$( "#tabs-document-1-select " ).selectbox();
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+	    $('.but').click(function(){
+	        $(this).toggleClass("down");
+	    });
+	});
+	</script>
+
+</head>
+<body>
+		<div class="new-document-box">
+			<div class="dialog-box">
+
+					
+		    			<div id="tabs-document-1">
+		    				
+		    				<div class="main-content-left-two-third no-margin">
+		    					<select id="tabs-document-1-select" class="fr">
+						    		<option>表單文件類別</option>
+						    		<option value="">知識樹</option>
+						    	</select>
+						    	<input type="button" class="bt-text fl c-dbl ml-15" value="新增表單文件"/>
+						    	<div class="clear"></div>
+	    						<div class="list-view">
+				    				<div class="list-title c-dog-b">
+				    					<span>文件分類</span>
+				    					<input type="button" class="bt-icon fr c-log icon-edit" title="選擇文件分類"/>
+				    				</div>
+				    				<div class="list-content">
+				    					<span class="title"><a href="#">總經理室</a></span>
+				    					<span class="title"><a href="#">總經理秘書室</a></span>
+				    					<span class="title"><a href="#">業務部</a></span>
+				    					<span class="title"><a href="#">總經理室</a></span>
+				    					<span class="title"><a href="#">總經理秘書室</a></span>
+				    					<span class="title"><a href="#">業務部</a></span>
+				    					<span class="title"><a href="#">總經理室</a></span>
+				    					<span class="title"><a href="#">總經理秘書室</a></span>
+				    					<span class="title"><a href="#">業務部</a></span>
+				    					<div class="clear"></div>
+				    				</div>
+
+				    				<div class="list-title c-dog-b">
+				    					<span>知識分類</span>
+				    					<input type="button" class="bt-icon fr c-log icon-edit" title="選擇知識分類"/>
+				    				</div>
+				    				<div class="list-content">
+				    					<span class="title"><a href="#">總經理室</a></span>
+				    					<span class="title"><a href="#">總經理秘書室</a></span>
+				    					<span class="title"><a href="#">業務部</a></span>
+				    					<span class="title"><a href="#">總經理室</a></span>
+				    					<span class="title"><a href="#">總經理秘書室</a></span>
+				    					<span class="title"><a href="#">業務部</a></span>
+				    					<span class="title"><a href="#">總經理室</a></span>
+				    					<span class="title"><a href="#">總經理秘書室</a></span>
+				    					<span class="title"><a href="#">業務部</a></span>
+				    					<span class="title"><a href="#">總經理室</a></span>
+				    					<span class="title"><a href="#">總經理秘書室</a></span>
+				    					<span class="title"><a href="#">業務部</a></span>
+				    					<div class="clear"></div>
+				    				</div>
+
+				    				<div class="list-title c-dog-b">
+				    					<span>組織分類</span>
+				    					<input type="button" class="bt-icon fr c-log icon-edit" title="選擇組織分類"/>
+				    				</div>
+				    				<div class="list-content">
+				    					<span class="title"><a href="#">總經理室</a></span>
+				    					<span class="title"><a href="#">總經理秘書室</a></span>
+				    					<span class="title"><a href="#">業務部</a></span>
+				    					<div class="clear"></div>
+				    				</div>
+				    				
+
+				    			</div>
+		    				</div>
+		    				<div class="main-content-right-one-third">
+		    					
+								<div class="list-view">
+								    <div class="list-title c-dbl-b">
+				    					<span>文件分類</span>
+				    				</div>
+				    				<div id="document-tree">
+										<ul>
+											<li class="jstree-open">
+												<a href="#">專案客製</a>
+												<ul>
+													<li>
+														<a href="#">一般產品</a>
+													</li>
+													<li>
+														<a href="#">SubFolder</a>
+													</li>
+												</ul>
+											</li>
+											<li>
+												<a href="#">TFS顧問102</a>
+											</li>
+											<li class="jstree-open">
+												<a href="#">TFS顧問103</a>
+												<ul>
+													<li class="jstree-open">
+														<a href="#">專案產品</a>
+														<ul>
+															<li class="jstree-open">
+																<a href="#">專案分類</a>
+															</li>
+														</ul>
+													</li>
+													<li>
+														<a href="#">總經理秘書</a>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+									<div class="clear"></div>
+				    				<div class="c-dbl-b list-text"></div>
+				    			</div>
+		    				</div>
+		    				<div class="clear"></div>
+		    			</div>
+
+		    	<div class="clear"></div>
+		    	<input type="button" value="取消" class="bt-text fr c-lgr ml-15" id="add-document-cancel"/>
+				<input type="button" value="確定" class="bt-text fr c-dbl ml-15" />
+			</div>
+		</div>
+</body>
+</html>

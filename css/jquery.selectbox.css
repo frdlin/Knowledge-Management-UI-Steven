@@ -1,0 +1,147 @@
+@CHARSET "UTF-8";
+.sbHolder{
+	background-color: #FFFFFF;
+	border: none;
+	font-family: Open Sans;
+	font-size: 16px;
+	font-weight: normal;
+	height: 45px;
+	position: relative;
+	width: 190px;
+	float: right;
+}
+.sbHolder:focus .sbSelector{
+	
+}
+.sbSelector{
+	display: block;
+	height: 45px;
+	left: 0;
+	line-height: 45px;
+	outline: none;
+	overflow: hidden;
+	position: absolute;
+	text-indent: 15px;
+	top: 0;
+	width: 145px;
+}
+.sbSelector:link, .sbSelector:visited, .sbSelector:hover{
+	color: #353945;
+	outline: none;
+	text-decoration: none;
+}
+.sbToggle{
+	background: url(../images/button-icon.png) -46px 0px no-repeat;
+	display: block;
+	height: 45px;
+	outline: none;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 45px;
+	background-color: #EE7B3A;
+}
+.sbToggle:hover{
+	background: url(../images/button-icon.png) -46px 0px no-repeat;
+	background-color: #B35C2C;
+}
+.sbToggleOpen{
+	background: url(../images/button-icon.png) -46px 0px no-repeat;
+	background-color: #EE7B3A;
+}
+.sbToggleOpen:hover{
+	background: url(../images/button-icon.png) -46px 0px no-repeat;
+	background-color: #B35C2C;
+}
+.sbHolderDisabled{
+	background-color: #3C3C3C;
+	border: solid 1px #515151;
+}
+.sbHolderDisabled .sbHolder{
+	
+}
+.sbHolderDisabled .sbToggle{
+	
+}
+.sbOptions{
+	background-color: #FFF;
+	border: solid 1px #A0A7b3;
+	list-style: none;
+	left: -1px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 45px;
+	width: 190px;
+	z-index: 1;
+	overflow-y: auto;
+}
+.sbOptions li{
+	padding: 0;
+}
+.sbOptions a{
+	border-bottom: dotted 1px #C6CAD1;
+	display: block;
+	outline: none;
+	padding: 7px 0 7px 15px;
+	height: 37px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	line-height: 23px;
+}
+.sbOptions a:link, .sbOptions a:visited{
+	color: #353945;
+	text-decoration: none;
+}
+.sbOptions a:hover,
+.sbOptions a:focus,
+.sbOptions a.sbFocus{
+	color: #FFF;
+	background-color: #F5B089;
+}
+.sbOptions li.last a{
+	border-bottom: none;
+}
+.sbOptions .sbDisabled{
+	border-bottom: dotted 1px #C6CAD1;
+	color: #999;
+	display: block;
+	padding: 7px 0 7px 3px;
+}
+.sbOptions .sbGroup{
+	border-bottom: dotted 1px #C6CAD1;
+	color: #353945;
+	display: block;
+	font-weight: bold;
+	padding: 7px 0 7px 3px;
+}
+.sbOptions .sbSub{
+	padding-left: 17px;
+}
+
+.selector-sort ~ .sbHolder {
+	background-color: transparent !important;
+	width: 150px;
+}
+
+.selector-sort ~ .sbHolder .sbToggle {
+	background-position: -181px 0px;
+	background-color: #79D6CA;
+}
+
+.selector-sort ~ .sbHolder .sbToggle:hover {
+	background-color: #5BA198;
+}
+
+.selector-sort ~ .sbHolder .sbSelector {
+	display: none;
+}
+
+.selector-sort ~ .sbHolder .sbOptions {
+	width: 150px;
+}
+
+.selector-sort ~ .sbHolder .sbOptions a.sbFocus {
+	background-color: #79D6CA;
+}

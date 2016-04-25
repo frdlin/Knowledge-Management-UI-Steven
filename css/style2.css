@@ -1,0 +1,120 @@
+/*
+ * jsTree default theme 1.0
+ * Supported features: dots/no-dots, icons/no-icons, focused, loading
+ * Supported plugins: ui (hovered, clicked), checkbox, contextmenu, search
+ */
+
+.jstree-default li, 
+.jstree-default ins { background-image:url("../images/d.png"); background-repeat:no-repeat; background-color:transparent; }
+.jstree-default li { background-position:-90px 0; background-repeat:repeat-y; }
+.jstree-default li.jstree-last { background:transparent; }
+.jstree-default .jstree-open > ins { background-position:-72px 0; }
+.jstree-default .jstree-closed > ins { background-position:-54px 0; }
+.jstree-default .jstree-leaf > ins { background-position:-36px 0; }
+.jstree-default .jstree-clicked { background:#FFF; border:0; padding:0; color: #01AFD1;}
+.jstree-default.jstree-focused { background:#DDD; margin-bottom: 5px;}
+
+#document-tree.jstree-default, #document-tree.jstree-default.jstree-focused, #permission-tree.jstree-default, #permission-tree.jstree-default.jstree-focused { background:#C6CAD1; margin-bottom: 1px; text-align: left; }
+
+.jstree a {
+	line-height: 40px !important;
+	height: 40px !important;
+	margin-left: 5px !important;
+	padding: 0 !important;
+	font-family: Open Sans;
+	font-size: 16px;
+}
+
+.jstree-default a ins.jstree-icon {
+	display: none;
+}
+
+#permission-tree.jstree > ul > li {
+margin-bottom: 1px;
+}
+
+#document-tree.jstree, #permission-tree.jstree {
+	margin-bottom: 2px;
+	border: 1px dotted #C6CAD1;
+}
+
+
+.jstree > ul > li {
+	margin-left: 0px !important;
+	background-color: #FFF !important;
+	margin-bottom: 3px;
+	padding-left: 15px;
+}
+
+.list-title {
+	height: 45px;
+	margin-bottom: 5px;
+	padding-left: 25px;
+	text-align: left;
+	line-height: 45px;
+	color: #FFF;
+	font-size: 16px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.c-dbl, .c-dbl-b {
+	background-color: #01AFD1;
+}
+
+.list-text {
+	height: 25px;
+	padding: 0 10px;
+	line-height: 25px;
+	vertical-align: middle;
+	color: #FFF;
+	text-align: center;
+	font-size: 12px;
+}
+
+.bt-icon-40 {
+	background-color: #C6CAD1;
+	cursor: pointer;
+	border: none;
+	width: 40px;
+	height: 40px;
+}
+
+.icon-next-40 {
+	background-image: url(../images/button-icon.png);
+	background-repeat: no-repeat;
+	overflow: hidden;
+	width: 40px;
+	height: 40px;
+	border-top: 1px solid #FFF;
+	background-position: -453px -2px;
+}
+
+.bt-icon-40.down {
+	background-color: #EE7B3A;
+}
+
+.c-dog {
+	background-color: #EE7B3A;
+}
+
+.c-dog:hover {
+	background-color: #B35C2C;
+}
+
+.fr {
+	float: right;
+}
+
+.c-lbl, .c-lbl-b {
+	background-color: #67CFE3;
+}
+
+.c-lbl:hover {
+	background-color: #4D9BAA;
+}
+
+.c-lbl:selected {
+	background-color: #EE7B3A;
+}

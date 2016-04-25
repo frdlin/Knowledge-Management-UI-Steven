@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>KM System</title>
+<script src="js/jquery-1.8.3.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="js/jquery.selectbox-0.2.js"></script>
+<script src="js/jquery.jstree.js"></script>
+<link rel="stylesheet" href="css/jquery.selectbox.css" />
+<link rel="stylesheet" href="css/main-style.css">
+<link rel="stylesheet" href="css/jquery-ui.css" />
+<link rel="stylesheet" href="css/tree-view.css">
+<link rel="stylesheet" href="css/style.css"/>
+<script type="text/javascript">
+	$(function () {
+		$("#document-tree, #permission-tree")
+			.jstree();
+	});
+</script>
+
+<!--相關文件新增Popup Windows-->
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#add-document").click(function () {
+				$("html").css({ "overflow": "hidden" }, 100);
+				$(".add-document-box").fadeIn(100);
+			});
+
+			$("#add-document-cancel").click(function () {
+				$(".add-document-box").fadeOut(100);
+				$("html").css({ "overflow": "auto" });
+			});
+		});
+    </script>
+<!--相關文件新增Popup Windows-->
+
+<!--刪除文章之確認Popup Windows-->
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#delete-document").click(function () {
+				$("html").css({ "overflow": "hidden" }, 100);
+				$(".delete-document-box").fadeIn(100);
+			});
+
+			$("#delete-document-cancel").click(function () {
+				$(".delete-document-box").fadeOut(100);
+				$("html").css({ "overflow": "auto" });
+			});
+		});
+    </script>
+<!--刪除文章之確認Popup Windows-->
+
+<!--新增附件之Popup Windows-->
+    <script type="text/javascript">
+		$(document).ready(function () {
+			$(".upload-file").click(function () {
+				$("html").css({ "overflow": "hidden" }, 100);
+				$(".upload-file-box").fadeIn(100);
+			});
+
+			$("#upload-file-cancel").click(function () {
+				$(".upload-file-box").fadeOut(100);
+				$("html").css({ "overflow": "auto" });
+			});
+		});
+    </script>
+<!--新增附件之Popup Windows-->
+
+<!--檢視版本之Popup Windows-->
+    <script type="text/javascript">
+		$(document).ready(function () {
+			$("#view-version").click(function () {
+				$("html").css({ "overflow": "hidden" }, 100);
+				$(".view-version-box").fadeIn(100);
+			});
+
+			$("#view-version-cancel").click(function () {
+				$(".view-version-box").fadeOut(100);
+				$("html").css({ "overflow": "auto" });
+			});
+		});
+    </script>
+<!--檢視版本之確認Popup Windows-->
+
+<!--檢視修改歷程記錄之確認Popup Windows-->
+    <script type="text/javascript">
+		$(document).ready(function () {
+			$("#view-modified").click(function () {
+				$("html").css({ "overflow": "hidden" }, 100);
+				$(".view-modified-box").fadeIn(100);
+			});
+
+			$("#view-modified-cancel").click(function () {
+				$(".view-modified-box").fadeOut(100);
+				$("html").css({ "overflow": "auto" });
+			});
+		});
+    </script>
+<!--檢視修改歷程記錄之確認Popup Windows-->
+
+<!--文章編輯之檢視模式與編輯模式切換-->
+    <script type="text/javascript">
+		$(document).ready(function () {
+			$(".bt-document-edit").click(function () {
+				$(".display-mode").hide();
+				$(".edit-mode").show();
+			});
+
+			$(".bt-document-quit").click(function () {
+				$(".display-mode").show();
+				$(".edit-mode").hide();
+			});
+		});
+    </script>
+<!--文章編輯之檢視模式與編輯模式切換-->
+
+<!--標簽歸屬之檢視模式與編輯模式切換-->
+    <script type="text/javascript">
+		$(document).ready(function () {
+			$(".bt-tag-belong-edit").click(function () {
+				$(".tag-belong-display-mode").hide();
+				$(".tag-belong-edit-mode").show();
+			});
+
+			$(".bt-tag-belong-quit").click(function () {
+				$(".tag-belong-display-mode").show();
+				$(".tag-belong-edit-mode").hide();
+			});
+		});
+    </script>
+<!--標簽歸屬之檢視模式與編輯模式切換-->
+
+	<script type="text/javascript">
+		$(function () {
+
+			$( "#search, #version, #permission" ).selectbox();
+
+			$( "#tabs-document-1-select, #tabs-document-2-select, #tabs-document-3-select, #tabs-document-4-select, #tabs-document-5-select " ).selectbox();
+
+			$( "#selectable" ).selectable();
+
+			$( document ).tooltip({
+				track: true
+			});
+
+			$( "#tabs, #tabs-document, #tabs-permission" ).tabs();
+
+			$( "#check, #check2" ).button();
+
+			$( "#datepicker" ).datepicker();
+
+			$( "#permission-result" ).buttonset();
+
+		});
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+	    $('.but').click(function(){
+	        $(this).toggleClass("down");
+	    });
+	    $('.permission-but').click(function(){
+	        $(this).toggleClass("down");
+	    });
+	});
+	</script>
+	<script type="text/javascript">
+		$( "#permission-select" ).change(function () {
+	    if($( "option:selected", this ).text()=="以名稱查詢"){
+	    	$("#permission-tree").hide();
+	    	$("#permission-name").show(); 
+	    }else{
+	    	$("#permission-tree").show();
+	    	$("#permission-name").hide();        
+	    }
+	});
+	</script>
+</head>
+<body>
+		<div class="add-document-box">
+			<div class="dialog-box">
+				<div id="tabs-document">
+					<ul>
+						<li><a href="#tabs-document-1">知識樹</a></li>
+						<li><a href="#tabs-document-2">標簽</a></li>
+					</ul>
+		    			<div id="tabs-document-1">
+		    				<div class="main-content-right-one-third">
+		    					<select id="tabs-document-1-select" class="fl">
+						    		<option>文件內容類型</option>
+						    		<option value="">知識樹</option>
+						    	</select>
+						    	<div class="clear"></div>
+								<div class="list-view">
+								    <div class="list-title c-dbl-b">
+				    					<span>知識樹</span>
+				    				</div>
+				    				<div id="document-tree">
+										<ul>
+											<li class="jstree-open">
+												<a href="#">專案客製</a>
+												<ul>
+													<li>
+														<a href="#">一般產品</a>
+													</li>
+													<li>
+														<a href="#">SubFolder</a>
+													</li>
+												</ul>
+											</li>
+											<li>
+												<a href="#">TFS顧問102</a>
+											</li>
+											<li class="jstree-open">
+												<a href="#">TFS顧問103</a>
+												<ul>
+													<li class="jstree-open">
+														<a href="#">專案產品</a>
+														<ul>
+															<li class="jstree-open">
+																<a href="#">專案分類</a>
+															</li>
+														</ul>
+													</li>
+													<li>
+														<a href="#">總經理秘書</a>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</div>
+									<div class="clear"></div>
+				    				<div class="c-dbl-b list-text"></div>
+				    			</div>
+		    				</div>
+		    				<div class="main-content-left-two-third no-margin">
+		    					<input type="button" class="bt-icon fr c-dog icon-search" value=""/>
+	    						<input type="text" class="fr border" style="width: 390px;" placeholder="關鍵字"/>
+	    						<div class="clear"></div>
+	    						<div class="list-view">
+				    				<div class="list-title c-dog-b">
+				    					<span>搜尋結果</span>
+				    				</div>
+				    				<div class="list-content-3row">
+				    					<div class="list-content-main">
+				    						<span class="title"><a href="#">CSR-meta-test</a></span>
+				    						<div class="but fr icon-ok" title="選擇/取消"></div>
+				    						<div class="clear"></div>
+				    					</div>
+				    					<div class="list-content-text">RF Test for BT, 2.4G, Wifi</div>
+				    					<div class="list-content-info">
+				    						<span class="similarity">A1品質手冊, 相似度0.98765431</span>
+				    						<span class="built-day">文章建立於280天前</span>
+				    						<span class="modified-day">Charlie Brown修改於1234天前</span>
+				    					</div>
+				    					<div class="clear"></div>
+				    				</div>
+				    				<div class="list-content-3row">
+				    					<div class="list-content-main">
+				    						<span class="title"><a href="#">CSR-meta-test</a></span>
+				    						<div class="but fr icon-ok" title="選擇/取消"></div>
+				    						<div class="clear"></div>
+				    					</div>
+				    					<div class="list-content-text">RF Test for BT, 2.4G, Wifi</div>
+				    					<div class="list-content-info">
+				    						<span class="similarity">A1品質手冊, 相似度0.98765431</span>
+				    						<span class="built-day">文章建立於280天前</span>
+				    						<span class="modified-day">Charlie Brown修改於1234天前</span>
+				    					</div>
+				    					<div class="clear"></div>
+				    				</div>
+				    				<div class="list-content-3row">
+				    					<div class="list-content-main">
+				    						<span class="title"><a href="#">CSR-meta-test</a></span>
+				    						<div class="but fr icon-ok" title="選擇/取消"></div>
+				    						<div class="clear"></div>
+				    					</div>
+				    					<div class="list-content-text">RF Test for BT, 2.4G, Wifi</div>
+				    					<div class="list-content-info">
+				    						<span class="similarity">A1品質手冊, 相似度0.98765431</span>
+				    						<span class="built-day">文章建立於280天前</span>
+				    						<span class="modified-day">Charlie Brown修改於1234天前</span>
+				    					</div>
+				    					<div class="clear"></div>
+				    				</div>
+				    				<div class="list-content-3row">
+				    					<div class="list-content-main">
+				    						<span class="title"><a href="#">CSR-meta-test</a></span>
+				    						<div class="but fr icon-ok" title="選擇/取消"></div>
+				    						<div class="clear"></div>
+				    					</div>
+				    					<div class="list-content-text">RF Test for BT, 2.4G, Wifi</div>
+				    					<div class="list-content-info">
+				    						<span class="similarity">A1品質手冊, 相似度0.98765431</span>
+				    						<span class="built-day">文章建立於280天前</span>
+				    						<span class="modified-day">Charlie Brown修改於1234天前</span>
+				    					</div>
+				    					<div class="clear"></div>
+				    				</div>
+				    				<div class="c-dog-b list-text">搜尋花費時間0.05秒，共有17,321筆資料。</div>
+				    			</div>
+		    				</div>
+		    				<div class="clear"></div>
+		    			</div>
+		    			<div id="tabs-document-2">
+		    				<div class="main-content-right-one-third">
+		    					<select id="tabs-document-2-select" class="fl">
+						    		<option>文件內容類型</option>
+						    		<option value="">知識樹</option>
+						    	</select>
+						    	<div class="clear"></div>
+						    	<select id="tabs-document-3-select" class="fl">
+						    		<option>建立者</option>
+						    		<option value="">全部</option>
+						    		<option value="">Steven Tu</option>
+						    		<option value="">Charlie Brown</option>
+						    		<option value="">Daniel Day-Lewis</option>
+						    	</select>
+						    	<div class="clear"></div>
+						    	<div class="tab-document-tags">
+						    		<span>C#、業務、客戶、ISO、測試案例、界面優化、小亨利、行不行</span>
+						    	</div>
+		    				</div>
+		    				<div class="main-content-left-two-third no-margin">
+		    					<input type="button" class="bt-icon fr c-dog icon-search" value=""/>
+	    						<input type="text" class="fr border" style="width: 390px;" placeholder="關鍵字"/>
+	    						<div class="clear"></div>
+	    						<div class="list-view">
+				    				<div class="list-title c-dog-b">
+				    					<span>搜尋結果</span>
+				    				</div>
+				    				<div class="list-content-3row">
+				    					<div class="list-content-main">
+				    						<span class="title"><a href="#">CSR-meta-test</a></span>
+				    						<div class="but fr icon-ok" title="選擇/取消"></div>
+				    						<div class="clear"></div>
+				    					</div>
+				    					<div class="list-content-text">RF Test for BT, 2.4G, Wifi</div>
+				    					<div class="list-content-info">
+				    						<span class="similarity">A1品質手冊, 相似度0.98765431</span>
+				    						<span class="built-day">文章建立於280天前</span>
+				    						<span class="modified-day">Charlie Brown修改於1234天前</span>
+				    					</div>
+				    					<div class="clear"></div>
+				    				</div>
+				    				<div class="list-content-3row">
+				    					<div class="list-content-main">
+				    						<span class="title"><a href="#">CSR-meta-test</a></span>
+				    						<div class="but fr icon-ok" title="選擇/取消"></div>
+				    						<div class="clear"></div>
+				    					</div>
+				    					<div class="list-content-text">RF Test for BT, 2.4G, Wifi</div>
+				    					<div class="list-content-info">
+				    						<span class="similarity">A1品質手冊, 相似度0.98765431</span>
+				    						<span class="built-day">文章建立於280天前</span>
+				    						<span class="modified-day">Charlie Brown修改於1234天前</span>
+				    					</div>
+				    					<div class="clear"></div>
+				    				</div>
+				    				<div class="list-content-3row">
+				    					<div class="list-content-main">
+				    						<span class="title"><a href="#">CSR-meta-test</a></span>
+				    						<div class="but fr icon-ok" title="選擇/取消"></div>
+				    						<div class="clear"></div>
+				    					</div>
+				    					<div class="list-content-text">RF Test for BT, 2.4G, Wifi</div>
+				    					<div class="list-content-info">
+				    						<span class="similarity">A1品質手冊, 相似度0.98765431</span>
+				    						<span class="built-day">文章建立於280天前</span>
+				    						<span class="modified-day">Charlie Brown修改於1234天前</span>
+				    					</div>
+				    					<div class="clear"></div>
+				    				</div>
+				    				<div class="list-content-3row">
+				    					<div class="list-content-main">
+				    						<span class="title"><a href="#">CSR-meta-test</a></span>
+				    						<div class="but fr icon-ok" title="選擇/取消"></div>
+				    						<div class="clear"></div>
+				    					</div>
+				    					<div class="list-content-text">RF Test for BT, 2.4G, Wifi</div>
+				    					<div class="list-content-info">
+				    						<span class="similarity">A1品質手冊, 相似度0.98765431</span>
+				    						<span class="built-day">文章建立於280天前</span>
+				    						<span class="modified-day">Charlie Brown修改於1234天前</span>
+				    					</div>
+				    					<div class="clear"></div>
+				    				</div>
+				    				<div class="c-dog-b list-text">搜尋花費時間0.05秒，共有17,321筆資料。</div>
+				    			</div>
+		    				</div>
+		    				<div class="clear"></div>
+		    			</div>
+		    	</div>
+		    	<div class="clear"></div>
+		    	<input type="button" value="取消" class="bt-text fr c-lgr ml-15" id="add-document-cancel"/>
+				<input type="button" value="確定" class="bt-text fr c-dbl ml-15" />
+			</div>
+		</div>
+
+		<div class="delete-document-box">
+            <div class="dialog-box">
+               	<p>確定要刪除本文件？</p>      
+		        <input type="button" value="取消" class="bt-text fr c-lgr ml-15" id="delete-document-cancel"/>
+		        <input type="button" value="確定" class="bt-text fr c-dbl ml-15"/>
+            </div>
+        </div>
+        <div class="upload-file-box">
+            <div class="dialog-box">
+               	<input type="text" class="fl ml-15" style="width: 380px;" placeholder="點擊選擇檔案">
+                <input type="button" value="取消" class="bt-text fr c-lgr ml-15" id="upload-file-cancel"/>
+                <input type="button" value="確定" class="bt-text fr c-dbl ml-15"/>
+            </div>
+        </div>
+        <div class="view-version-box">
+            <div class="dialog-box">
+            	<h3>檢視版本</h3>
+               	<table>
+               		<tr>
+               			<td class="title" width="20%">版本編號</td>
+               			<td class="title" width="35%">建立者</td>
+               			<td class="title" width="35%">建立時間</td>
+               			<td class="title" width="10%">內容</td>
+               		</tr>
+               		<tr>
+               			<td>1.0</td>
+               			<td>Steven Tu</td>
+               			<td>2013/12/22 16:32:45</td>
+               			<td><a href="#"><div class="view-content"></div></a></td>
+               		</tr>
+               		<tr>
+               			<td>1.0</td>
+               			<td>Steven Tu</td>
+               			<td>2013/12/22 16:32:45</td>
+               			<td><a href="#"><div class="view-content"></div></a></td>
+               		</tr>
+               		<tr>
+               			<td>1.0</td>
+               			<td>Steven Tu</td>
+               			<td>2013/12/22 16:32:45</td>
+               			<td><a href="#"><div class="view-content"></div></a></td>
+               		</tr>
+               		<tr>
+               			<td>1.0</td>
+               			<td>Steven Tu</td>
+               			<td>2013/12/22 16:32:45</td>
+               			<td><a href="#"><div class="view-content"></div></a></td>
+               		</tr>
+               		<tr>
+               			<td>1.0</td>
+               			<td>Steven Tu</td>
+               			<td>2013/12/22 16:32:45</td>
+               			<td><a href="#"><div class="view-content"></div></a></td>
+               		</tr>
+               		<tr>
+               			<td>1.0</td>
+               			<td>Steven Tu</td>
+               			<td>2013/12/22 16:32:45</td>
+               			<td><a href="#"><div class="view-content"></div></a></td>
+               		</tr>
+               		<tr>
+               			<td>1.0</td>
+               			<td>Steven Tu</td>
+               			<td>2013/12/22 16:32:45</td>
+               			<td><a href="#"><div class="view-content"></div></a></td>
+               		</tr>
+               	</table>
+                <input type="button" value="確定" class="bt-text fr c-dbl ml-15" id="view-version-cancel"/>
+            </div>
+        </div>
+
+        <div class="view-modified-box">
+            <div class="dialog-box">
+            	<h3>檢視修改歷程記錄</h3>
+               	<table>
+               		<tr>
+               			<td class="title" width="20%">修改人員</td>
+               			<td class="title" width="20%">異動時間</td>
+               			<td class="title" width="60%">動作</td>
+               		</tr>
+               		<tr>
+               			<td>Steven Tu</td>
+               			<td>2013/12/22 16:32:45</td>
+               			<td>從屬關係變動 (Change Relationship)</td>
+               		</tr>
+               		<tr>
+               			<td>Steven Tu</td>
+               			<td>2013/12/22 16:32:45</td>
+               			<td>從屬關係變動 (Change Relationship)</td>
+               		</tr>
+               		<tr>
+               			<td>Steven Tu</td>
+               			<td>2013/12/22 16:32:45</td>
+               			<td>從屬關係變動 (Change Relationship)</td>
+               		</tr>
+               		<tr>
+               			<td>Steven Tu</td>
+               			<td>2013/12/22 16:32:45</td>
+               			<td>從屬關係變動 (Change Relationship)</td>
+               		</tr>
+               		<tr>
+               			<td>Steven Tu</td>
+               			<td>2013/12/22 16:32:45</td>
+               			<td>從屬關係變動 (Change Relationship)</td>
+               		</tr>
+               	</table>
+                <input type="button" value="確定" class="bt-text fr c-dbl ml-15" id="view-modified-cancel"/>
+            </div>
+        </div>
+
+	    <div id="head">
+	    	<div class="logo"><a href="#"><img src="images/logo.png" alt="Logo"/></a></div>
+	    	<input type="button" value="" class="bt-icon fr c-trans icon-setting bt-setting" title="管理中心"/>
+	    	<div class="user"><a href="#">Steven Tu</a></div>
+	    </div>
+	    <div id="search-area">
+	    	<input type="button" class="bt-text fr c-dbl ml-15" value="進階搜尋"/>
+	    	<input type="button" class="bt-icon fr c-dog icon-search" value=""/>
+	    	<input type="text" class="fr ml-15" style="width: 380px;" placeholder="快速搜尋"/>
+	    	<select id="search" class="fr">
+	    		<option>搜尋區塊</option>
+	    		<option value="iso-document">ISO文件</option>
+	    		<option value="order-document">訂單文件</option>
+	    		<option value="kwoledge-bank">知識庫</option>
+	    		<option value="introcontrol-document">內控文件</option>
+	    		<option value="faq">FAQ問答</option>
+	    	</select>
+	    </div>
+	    <div id="content-area">
+	    	<div id="menu-area">
+	    		<ul id="main-menu">
+	    			<a href="#"><li class="menu-index">首頁</li></a>
+	    			<a href="#"><li class="menu-document-tree">文件樹</li></a>
+	    			<a href="#"><li class="menu-knowledge-tree">知識樹</li></a>
+	    			<a href="#"><li class="menu-form-maintain">表單維護</li></a>
+	    		</ul>
+	    		<ul id="counter-area">
+	    			<a href="#"><li class="counter-document"><span class="counter-number">1234567</span><br><span class="counter-text">文件</span></li></a>
+	    			<a href="#"><li class="counter-online"><span class="counter-number">567</span><br><span class="counter-text">上線</span></li></a>
+	    			<a href="#"><li class="counter-pending"><span class="counter-number">567</span><br><span class="counter-text">待審核</span></li></a>
+	    			<a href="#"><li class="counter-new"><span class="counter-number">127</span><br><span class="counter-text">新增</span></li></a>
+	    			<a href="#"><li class="counter-update"><span class="counter-number">127</span><br><span class="counter-text">新增</span></li></a>
+	    			<a href="#"><li class="counter-reading"><span class="counter-number">157</span><br><span class="counter-text">閱讀中</span></li></a>
+	    		</ul>
+	    	</div>
+	    	<div id="main-content">
+	    		<div class="main-content-left-two-third">
+	    			<div id="tabs">
+	    				<ul>
+	    					<li><a href="#tabs-1">內容</a></li>
+	    					<li><a href="#tabs-2">附件</a></li>
+	    					<li><a href="#tabs-3">相關文件</a></li>
+	    					<li><a href="#tabs-4">權限管理</a></li>
+	    				</ul>
+	    				<div id="document-button-set">
+	    					<input type="button" class="bt-icon fr c-lgn icon-close" id="delete-document" title="刪除文件"/>
+	    					<input type="checkbox" id="check"/><label for="check" title="訂閱/取消"></label>
+	    				</div>
+		    			<div id="tabs-1">
+		    				<div class="display-mode">
+			    				<input type="button" class="bt-icon fr c-dgn icon-edit bt-document-edit" title="編輯文件"/>
+				    				<h3>財務報表之審核機制</h3>
+				    				<table>
+				    					<tr>
+				    						<td class="title" width="25%">文件內容類型</td>
+				    						<td>ISO財務報表審核</td>
+				    					</tr>
+				    					<tr>
+				    						<td class="title">審核項目</td>
+				    						<td>財務全面性報表</td>
+				    					</tr>
+				    					<tr>
+				    						<td class="title">審核日期</td>
+				    						<td>2013/12/22</td>
+				    					</tr>
+				    					<tr>
+				    						<td class="title">審核公司</td>
+				    						<td>遠傳</td>
+				    					</tr>
+				    					<tr>
+				    						<td class="title">審核人員</td>
+				    						<td>杜世仲</td>
+				    					</tr>
+				    					<tr>
+				    						<td class="title">外部審核人員</td>
+				    						<td>理律，會計稽核人員</td>
+				    					</tr>
+				    					<tr>
+				    						<td class="title">稽核內容</td>
+				    						<td>・會計帳（總帳、成本賬、支出帳）之審查</br>・公司資金審查</br>・會計帳務</br>・國稅局過往資料之審查</td>
+				    					</tr>
+				    				</table>
+				    			<input type="button" class="bt-icon fr c-dgn icon-edit bt-document-edit" title="編輯文件"/>
+			    			</div>
+			    			<div class="edit-mode">
+			    				<input type="button" class="bt-text fr c-lgy ml-15 text-white bt-document-quit" value="取消"/>
+			    				<input type="button" class="bt-text fr c-dgn ml-15 text-white" value="完成"/>
+				    				<table>
+				    					<tr>
+				    						<td class="title" width="25%">標題</td>
+				    						<td><input type="text"></td>
+				    					</tr>
+				    					<tr>
+				    						<td class="title" width="25%">文件內容類型</td>
+				    						<td><input type="text"></td>
+				    					</tr>
+				    					<tr>
+				    						<td class="title">審核項目</td>
+				    						<td><input type="text" placeholder="請輸入報表名稱，做為本知識文件之標題"></td>
+				    					</tr>
+				    					<tr>
+				    						<td class="title">審核日期</td>
+				    						<td><input type="text" id="datepicker" placeholder="請輸入本次審核日期"></td>
+				    					</tr>
+				    					<tr>
+				    						<td class="title">審核公司</td>
+				    						<td><input type="text" placeholder="請輸入本次審核公司"></td>
+				    					</tr>
+				    					<tr>
+				    						<td class="title">審核人員</td>
+				    						<td><textarea rows="4" cols="50" placeholder="請註明本次拜訪之審核人員"></textarea></td>
+				    					</tr>
+				    					<tr>
+				    						<td class="title">外部審核人員</td>
+				    						<td><textarea rows="4" cols="50"></textarea></td>
+				    					</tr>
+				    					<tr>
+				    						<td class="title">稽核內容</td>
+				    						<td><textarea rows="10" cols="50" placeholder="此欄位為摘要，請輸入訪談內容重點"></textarea></td>
+				    					</tr>
+				    				</table>
+			    				<input type="button" class="bt-text fr c-lgy ml-15 text-white bt-document-quit" value="取消"/>
+			    				<input type="button" class="bt-text fr c-dgn ml-15 text-white" value="完成"/>
+			    			</div>
+		    				
+		    				<div class="clear"></div>
+						</div>
+						<div id="tabs-2">
+							<div class="attachment">
+								<span>Finance 01.txt</span>
+								<input type="button" class="bt-icon fr c-lgn icon-delete" title="刪除附件"/>
+							</div>
+							<div class="attachment">
+								<span>Finance 02.txt</span>
+								<input type="button" class="bt-icon fr c-lgn icon-delete" title="刪除附件"/>
+							</div>
+							<div class="attachment">
+								<span>Finance 03.txt</span>
+								<input type="button" class="bt-icon fr c-lgn icon-delete" title="刪除附件"/>
+							</div>
+							<div class="attachment">
+								<span>Eleifend est et turpis duis id erat.txt</span>
+								<input type="button" class="bt-icon fr c-lgn icon-delete" title="刪除附件"/>
+							</div>
+							<div class="pre-attach">
+								<input type="button" class="bt-icon fr c-dgn icon-add upload-file" title="新增附件"/>
+							</div>
+						</div>
+						<div id="tabs-3">
+							<div class="attachment">
+								<span>20131222 內帳匯出</span>
+								<input type="button" class="bt-icon fr c-lgn icon-delete" title="刪除文件"/>
+							</div>
+							<div class="attachment">
+								<span>20131226 外帳匯出</span>
+								<input type="button" class="bt-icon fr c-lgn icon-delete" title="刪除文件"/>
+							</div>
+							<div class="attachment">
+								<span>20131226 內外帳報表</span>
+								<input type="button" class="bt-icon fr c-lgn icon-delete" title="刪除文件"/>
+							</div>
+							<div class="attachment">
+								<span>2013122 關聯報表</span>
+								<input type="button" class="bt-icon fr c-lgn icon-delete" title="刪除文件"/>
+							</div>
+							<div class="pre-attach">
+								<input type="button" id="add-document" class="bt-icon fr c-dgn icon-add" title="新增文件"/>
+							</div>
+						</div>
+						<div id="tabs-4">
+							<div id="tabs-permission">
+			    				<ul>
+			    					<li><a href="#permission-tabs-1">以名稱查詢</a></li>
+			    					<li><a href="#permission-tabs-2">以公司樹查詢</a></li>
+			    				</ul>
+				    			<div id="permission-tabs-1">
+				    				<div id="permission-name">
+				    					<input type="button" class="bt-icon fr c-dog icon-search" value=""/>
+										<input type="text" class="fr border mb-0 ml-15" style="width: 150px;" placeholder="請鍵入名稱"/>
+										<select id="permission" class="fr">
+											<option>單位名稱</option>
+											<option value="">總經理室</option>
+											<option value="">會計部</option>
+										</select>
+									</div>
+				    			</div>
+				    			<div id="permission-tabs-2">
+				    				<div id="permission-tree">
+										<div class="list-view">
+									    <div class="list-title c-dbl-b">
+					    					<span>文件樹</span>
+					    				</div>
+					    				<div id="permission-tree">
+											<ul>
+												<li class="jstree-open">
+													<a href="#">總經理秘書</a>
+													<ul>
+														<li>
+															<a href="#">總經理秘書</a>
+														</li>
+														<li>
+															<a href="#">總經理秘書</a>
+														</li>
+													</ul>
+												</li>
+												<li>
+													<a href="#">總經理秘書</a>
+												</li>
+												<li class="jstree-open">
+													<a href="#">總經理秘書</a>
+													<ul>
+														<li class="jstree-open">
+															<a href="#">總經理秘書</a>
+															<ul>
+																<li class="jstree-open">
+																	<a href="#">總經理秘書</a>
+																</li>
+															</ul>
+														</li>
+														<li>
+															<a href="#">總經理秘書</a>
+														</li>
+													</ul>
+												</li>
+											</ul>
+										</div>
+										<div class="clear"></div>
+					    				<div class="c-dbl-b list-text"></div>
+					    			</div>
+									</div>
+				    			</div>
+				    			<div class="clear"></div>
+								<div id="permission-result">
+									<input type="checkbox" id="check1"><label for="check1">Steven Tu</label>
+									<input type="checkbox" id="check2"><label for="check2">黃大同</label>
+									<input type="checkbox" id="check3"><label for="check3">Steven Tu</label>
+									<input type="checkbox" id="check4"><label for="check4">黃大同</label>
+									<input type="checkbox" id="check5"><label for="check5">Steven Tu</label>
+									<input type="checkbox" id="check6"><label for="check6">黃大同</label>
+									<input type="checkbox" id="check7"><label for="check7">Steven Tu</label>
+									<input type="checkbox" id="check8"><label for="check8">黃大同</label>
+									<input type="checkbox" id="check9"><label for="check9">Steven Tu</label>
+									<input type="checkbox" id="check10"><label for="check10">黃大同</label>
+								</div>
+								<input type="button" class="bt-text fr c-lgy ml-15 text-white bt-document-quit" value="取消"/>
+			    				<input type="button" class="bt-text fr c-dgn ml-15 text-white" value="加入"/>
+								<div class="clear"></div>
+								<h3>文件權限設定</h3>
+								<table>
+									<tbody>
+										<tr>
+											<td class="title" width="180px">使用者</td>
+											<td class="title">新增</td>
+											<td class="title">刪除</td>
+											<td class="title">閱讀</td>
+											<td class="title">修改</td>
+											<td class="title" width="45px"></td>
+										</tr>
+										<tr>
+											<td>Steven Tu</td>
+											<td></td>
+											<td></td>
+											<td><div class="permission-but fl icon-ok" title="選擇/取消"></div></td>
+											<td></td>
+											<td><input type="button" id="remove" class="bt-icon fl c-lgy icon-close" title="刪除"/></td>
+										</tr>
+										<tr>
+											<td>Steven Tu</td>
+											<td></td>
+											<td></td>
+											<td><div class="permission-but fl icon-ok" title="選擇/取消"></div></td>
+											<td></td>
+											<td><input type="button" id="remove" class="bt-icon fl c-lgy icon-close" title="刪除"/></td>
+										</tr>
+										<tr>
+											<td>Steven Tu</td>
+											<td><div class="permission-but fl icon-ok" title="選擇/取消"></div></td>
+											<td><div class="permission-but fl icon-ok" title="選擇/取消"></div></td>
+											<td><div class="permission-but fl icon-ok" title="選擇/取消"></div></td>
+											<td><div class="permission-but fl icon-ok" title="選擇/取消"></div></td>
+											<td><input type="button" id="remove" class="bt-icon fl c-lgy icon-close" title="刪除"/></td>
+										</tr>
+									</tbody>
+								</table>
+								<input type="button" class="bt-text fr c-dgn ml-15 text-white" value="完成"/>
+								<div class="clear"></div>
+				    		</div>
+						</div>
+					</div>
+					<div class="c-dgn-b list-text"></div>
+	    		</div>
+	    		<div class="main-content-right-one-third">
+	    			<div class="list-view">
+	    				<div class="list-title c-dog-b">
+	    					<span>版本控管</span>
+	    					<input type="button" class="bt-icon fr c-log icon-list" id="view-modified" title="檢視修改歷程記錄"/>
+	    					<input type="button" class="bt-icon fr c-log icon-document" id="view-version" title="檢視版本"/>
+	    				</div>
+	    				<div class="list-blank">
+	    					<table>
+		    					<tr>
+		    						<td class="title" width="100"><span>目前版本</span></td>
+		    						<td>
+		    							<select id="version" class="fl">
+								    		<option value="1.0">1.1</option>
+								    		<option value="1.0">1.0</option>
+								    	</select>
+		    						</td>
+		    					</tr>
+		    					<tr>
+		    						<td class="title"><span>最新版本</span></td>
+			    					<td><span>1.3</span></td>
+		    					</tr>
+		    				</table>
+	    					<div class="clear"></div>
+	    				</div>
+	    			</div>
+	    			<div class="list-view">
+	    				<div class="list-title c-dbl-b">
+	    					<span>知識樹分類</span>
+	    					<input type="button" class="bt-icon fr c-lbl icon-edit" title="編輯分類"/>
+	    				</div>
+	    				<div class="list-blank">
+	    					<span>知識樹分類、知識樹分類、知識樹分類、知識樹分類、知識樹分類、知識樹分類</span>
+	    					<div class="clear"></div>
+	    				</div>
+	    			</div>
+	    			<div class="list-view">
+	    				<div class="list-title c-dbl-b">
+	    					<span>文件樹分類</span>
+	    					<input type="button" class="bt-icon fr c-lbl icon-edit" title="編輯分類"/>
+	    				</div>
+	    				<div class="list-blank">
+	    					<span>文件樹分類、文件樹分類、文件樹分類、文件樹分類、文件樹分類</span>
+	    					<div class="clear"></div>
+	    				</div>
+	    			</div>
+	    			<div class="list-view">
+	    				<div class="list-title c-dbl-b">
+	    					<span>歸屬標簽</span>
+	    					<input type="button" class="bt-icon fr c-lbl icon-edit bt-tag-belong-edit" title="編輯標簽"/>
+	    				</div>
+	    				<div class="list-blank ">
+	    					<div class="tag-belong-display-mode">
+		    					<span>歸屬標簽、歸屬標簽、歸屬標簽、歸屬標簽、歸屬標簽、歸屬標簽、歸屬標簽</span>
+		    				</div>
+		    				<div class="tag-belong-edit-mode">
+		    					<textarea rows="3" placeholder="編輯標簽"></textarea>
+		    					<div class="clear"></div>
+		    					<input type="button" class="bt-text ml-15 fr c-lgy bt-tag-belong-quit" value="取消"/>
+		    					<input type="button" class="bt-text fr c-lbl " value="完成"/>
+		    				</div>
+	    					<div class="clear"></div>
+	    				</div>
+	    			</div>
+	    			<div class="list-view">
+	    				<div class="list-title c-dbl-b">
+	    					<span>文章評分</span>
+	    				</div>
+	    				<div class="list-blank" id="document-score">
+	    					<ol id="selectable">
+	    						<li class="ui-state-default">10</li>
+	    						<li class="ui-state-default">9</li>
+	    						<li class="ui-state-default">8</li>
+	    						<li class="ui-state-default">7</li>
+	    						<li class="ui-state-default">6</li>
+	    						<li class="ui-state-default">5</li>
+	    						<li class="ui-state-default">4</li>
+	    						<li class="ui-state-default">3</li>
+	    						<li class="ui-state-default">2</li>
+	    						<li class="ui-state-default">1</li>
+	    					</ol>
+	    					<div class="clear"></div>
+	    				</div>
+	    			</div>
+	    		</div>
+	    		<div class="clear"></div>
+	    	</div>
+	    </div>
+	    <div class="clear"></div>
+	    <div id="footer"></div>
+	    <div class="clear"></div>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>KM System</title>
+<script src="js/jquery-1.8.3.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+<script src="js/jquery.selectbox-0.2.js"></script>
+<link rel="stylesheet" href="css/jquery.selectbox.css" />
+<link rel="stylesheet" href="css/main-style.css">
+<link rel="stylesheet" href="css/jquery-ui.css" />
+	<script type="text/javascript">
+		$(function () {
+
+			$( "#search" ).selectbox();
+
+			$( "#selectable" ).selectable();
+
+			$( document ).tooltip({
+				track: true
+			});
+
+		});
+	</script>
+</head>
+<body>
+	    <div id="head">
+	    	<div class="logo"><a href="#"><img src="images/logo.png" alt="Logo"/></a></div>
+	    	<input type="button" value="" class="bt-icon fr c-trans icon-setting bt-setting" title="管理中心"/>
+	    	<div class="bt-icon fr c-trans new-chat-notice" title="線上對話"><span>12</span></div>
+	    	<div class="bt-icon fr c-trans new-doc-notice" title="最新文件通知"><span>12</span></div>
+	    	<div class="bt-icon fr c-trans new-chat-notice" title="線上對話"></div>
+	    	<div class="bt-icon fr c-trans new-doc-notice" title="最新文件通知"></div>
+	    	<div class="bt-icon fr c-trans new-chat" title="線上對話"></div>
+	    	<div class="bt-icon fr c-trans new-doc" title="最新文件通知"></div>
+	    	<div class="user"><a href="#">Steven Tu</a></div>
+	    </div>
+	    <div id="search-area">
+	    	<input type="button" class="bt-text fr c-dbl ml-15" value="進階搜尋"/>
+	    	<input type="button" class="bt-icon fr c-dog icon-search" value=""/>
+	    	<input type="text" class="fr ml-15" style="width: 380px;" placeholder="快速搜尋"/>
+	    	<select id="search" class="fr">
+	    		<option>搜尋區塊</option>
+	    		<option value="iso-document">ISO文件</option>
+	    		<option value="order-document">訂單文件</option>
+	    		<option value="kwoledge-bank">知識庫</option>
+	    		<option value="introcontrol-document">內控文件</option>
+	    		<option value="faq">FAQ問答</option>
+	    	</select>
+	    </div>
+	    <div id="content-area">
+	    	<div id="menu-area">
+	    		<ul id="main-menu">
+	    			<a href="#"><li class="menu-index">首頁</li></a>
+	    			<a href="#"><li class="menu-document-tree">文件樹</li></a>
+	    			<a href="#"><li class="menu-knowledge-tree">知識樹</li></a>
+	    			<a href="#"><li class="menu-form-maintain">表單維護</li></a>
+	    		</ul>
+	    		<ul id="counter-area">
+	    			<a href="#"><li class="counter-document"><span class="counter-number">1234567</span><br><span class="counter-text">文件</span></li></a>
+	    			<a href="#"><li class="counter-online"><span class="counter-number">567</span><br><span class="counter-text">上線</span></li></a>
+	    			<a href="#"><li class="counter-pending"><span class="counter-number">567</span><br><span class="counter-text">待審核</span></li></a>
+	    			<a href="#"><li class="counter-new"><span class="counter-number">127</span><br><span class="counter-text">新增</span></li></a>
+	    			<a href="#"><li class="counter-update"><span class="counter-number">127</span><br><span class="counter-text">新增</span></li></a>
+	    			<a href="#"><li class="counter-reading"><span class="counter-number">157</span><br><span class="counter-text">閱讀中</span></li></a>
+	    		</ul>
+	    	</div>
+	    	<div id="main-content">
+	    		<div class="main-content-full">
+	    			<div class="list-title c-dgn-b">
+	    				<span>KM表單維護</span>
+	    				<input type="button" class="bt-icon fr c-lgn icon-add" title="新增KM文件表單"/>
+	    			</div>
+	    			<div class="tag-content">
+		    			<table class="form-table">
+		    				<tr>
+		    					<td class="title" width="60">編號</td>
+		    					<td class="title">表單名稱</td>
+		    					<td class="title" width="70">文件數量</td>
+		    					<td class="title" width="160">最後更新時間</td>
+		    					<td class="title">表單描述</td>
+		    					<td class="title" width="90">編輯</td>
+		    				</tr>
+		    				<tr>
+		    					<td>1</td>
+		    					<td>財務報表</td>
+		    					<td>0</td>
+		    					<td>2013/10/22 13:51:24</td>
+		    					<td></td>
+		    					<td><input type="button" class="bt-icon fl c-lgn icon-edit" title="修改"/><input type="button" class="bt-icon fl c-lgy icon-close" title="刪除"/></td>
+		    				</tr>
+		    				<tr>
+		    					<td>2</td>
+		    					<td>財務報表</td>
+		    					<td>0</td>
+		    					<td>2013/10/22 13:51:24</td>
+		    					<td></td>
+		    					<td><input type="button" class="bt-icon fl c-lgn icon-edit" title="修改"/><input type="button" class="bt-icon fl c-lgy icon-close" title="刪除"/></td>
+		    				</tr>
+		    				<tr>
+		    					<td>3</td>
+		    					<td>財務報表</td>
+		    					<td>0</td>
+		    					<td>2013/10/22 13:51:24</td>
+		    					<td></td>
+		    					<td><input type="button" class="bt-icon fl c-lgn icon-edit" title="修改"/><input type="button" class="bt-icon fl c-lgy icon-close" title="刪除"/></td>
+		    				</tr>
+		    				<tr>
+		    					<td>4</td>
+		    					<td>財務報表</td>
+		    					<td>0</td>
+		    					<td>2013/10/22 13:51:24</td>
+		    					<td></td>
+		    					<td><input type="button" class="bt-icon fl c-lgn icon-edit" title="修改"/><input type="button" class="bt-icon fl c-lgy icon-close" title="刪除"/></td>
+		    				</tr>
+		    			</table>
+		    		</div>
+	    			<a href="#" title="更多"><div class="c-dgn list-more"></div></a>
+	    		</div>
+	    		<div class="clear"></div>
+	    	</div>
+	    </div>
+	    <div class="clear"></div>
+	    <div id="footer"></div>
+	    <div class="clear"></div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+.new-document-box {
+	width: 100%;
+	height: 100%;
+	background: url(../images/seventy.png);
+	position: fixed;
+	display: inline;
+	z-index: 99999;
+}
+
+.new-document-box .dialog-box {
+	height: 600px;
+	margin-left: -500px;
+	margin-top: -300px;
+	width: 1000px;
+	overflow: scroll;
+}
+
+.new-document-box .dialog-box {
+	background-color: #FFFFFF;
+	left: 50%;
+	padding: 30px;
+	position: absolute;
+	top: 50%;
+	border: 5px solid #01AFD1;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.new-document-box .sbHolder {
+	float: left;
+	width: 230px;
+	margin-bottom: 30px;
+}
+
+.new-document-box .sbSelector {
+	height: 43px;
+	color: #353945;
+	border: 1px dotted #C6CAD1;
+	width: 183px;
+	text-align: left;
+}
+
+.new-document-box .sbOptions {
+	border: solid 1px #EEE !important;
+	width: 230px;
+	text-align: left;
+	background-color: #FFF;
+	list-style: none;
+	left: -1px;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	z-index: 1;
+	overflow-y: auto;
+}
+
+.new-document-box .jstree > ul > li {
+	margin-bottom: 1px;
+}
+
+.but-40 {
+	background-color: #C6CAD1;
+	cursor: pointer;
+	border: none;
+	width: 40px;
+	height: 40px;
+}
+
+.but-40.down {
+background-color: #EE7B3A;
+}
+
+.title a {
+	float: left;
+	line-height: 24px;
+	vertical-align: middle;
+	color: #353945;
+	font-size: 16px;
+	padding: 10px;
+	text-decoration: none;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
